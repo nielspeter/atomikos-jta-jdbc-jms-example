@@ -1,0 +1,33 @@
+apply plugin: 'java'
+
+sourceCompatibility = 1.7
+version = '1.0'
+
+def springVersion = '4.1.5.RELEASE'
+def atomikosVersion = '3.9.3'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    compile "org.springframework:spring-context:${springVersion}"
+    compile "org.springframework:spring-test:${springVersion}"
+    compile "org.springframework:spring-tx:${springVersion}"
+    compile "org.springframework:spring-jms:${springVersion}"
+    compile "org.springframework:spring-jdbc:${springVersion}"
+
+    compile "com.atomikos:transactions-jdbc:${atomikosVersion}"
+    compile "com.atomikos:transactions-jms:${atomikosVersion}"
+
+    compile "org.apache.activemq:activemq-core:5.7.0"
+
+    compile "log4j:log4j:1.2.16"
+
+    runtime 'org.slf4j:slf4j-log4j12:1.6.6'
+    runtime 'javax.transaction:jta:1.1'
+    runtime 'com.h2database:h2:1.4.186'
+
+    testCompile 'junit:junit:4.11'
+}
