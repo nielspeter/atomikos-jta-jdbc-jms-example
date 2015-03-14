@@ -15,13 +15,13 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:applicationContext.xml")
-public class JdbcAndJmsTest {
+public class PersonServiceTest {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    private JdbcAndJms service;
+    private PersonService personService;
 
     @Before
     public void before() {
@@ -37,11 +37,11 @@ public class JdbcAndJmsTest {
     public void testCommit() throws JMSException {
 
         // when
-        service.registerNewPerson(1, "Niels Peter", false);
+        personService.registerNewPerson(1, "Niels Peter", false);
 
         // then
         assertTrue(1 == jdbcTemplate.queryForObject("SELECT COUNT(*) FROM PERSON", Integer.class));
-        assertEquals("{id: '1', name: 'Niels Peter'}", service.receivePersonCreatedMessage());
+        assertEquals("{id: '1', name: 'Niels Peter'}", personService.receivePersonCreatedMessage());
     }
 
     @Test
@@ -49,13 +49,13 @@ public class JdbcAndJmsTest {
 
         // when
         try {
-            service.registerNewPerson(1, "Niels Peter", true);
+            personService.registerNewPerson(1, "Niels Peter", true);
         } catch (IllegalStateException e) {
             assertEquals("BOOM", e.getMessage());
         }
 
         // then
         assertTrue(0 == jdbcTemplate.queryForObject("SELECT COUNT(*) FROM PERSON", Integer.class));
-        assertNull(service.receivePersonCreatedMessage());
+        assertNull(personService.receivePersonCreatedMessage());
     }
 }
