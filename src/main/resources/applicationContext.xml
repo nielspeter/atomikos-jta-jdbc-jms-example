@@ -5,7 +5,7 @@
     http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- Scans the classpath for annotated components -->
-    <context:component-scan base-package="com.npstrandberg.jta.examples"/>
+    <context:component-scan base-package="io.strandberg.jta.examples"/>
 
     <!-- Annotation driven transactions -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
